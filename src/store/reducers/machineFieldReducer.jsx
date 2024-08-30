@@ -1,6 +1,7 @@
 const initialState = {
   fields: [],
   machineTypes: [],
+  objectTitles: [],
 };
 
 export const machineFieldReducer = (state = initialState, action) => {
@@ -44,7 +45,9 @@ export const machineFieldReducer = (state = initialState, action) => {
       );
       if (findTypeEditIndex !== -1) {
         let updatedType = { ...previousMachineEditTypes[findTypeEditIndex] };
+
         updatedType.machineType = action.payload.value;
+
         previousMachineEditTypes[findTypeEditIndex] = updatedType;
       }
       return {
@@ -57,6 +60,7 @@ export const machineFieldReducer = (state = initialState, action) => {
       let findTypeIndexField = previousMachineTypesField?.findIndex(
         (item) => item.typeId === action.payload.typeId
       );
+
       if (findTypeIndexField !== -1) {
         let updatedType = { ...previousMachineTypesField[findTypeIndexField] };
         let findFieldInd = updatedType.fields?.findIndex(
@@ -138,6 +142,40 @@ export const machineFieldReducer = (state = initialState, action) => {
         ...state,
         machineTypes: filteredItem,
       };
+    case "ADD_OBJ_TITLE":
+      let preObjectTitles = state.objectTitles;
+      let findObjectTitles = preObjectTitles?.find(
+        (item) => item.typeId === action.payload.typeId
+      );
+      let findObjectTitlesInd = preObjectTitles?.findIndex(
+        (item) => item.typeId === action.payload.typeId
+      );
+      if (findObjectTitles && findObjectTitles.hasOwnProperty("value")) {
+        findObjectTitles["value"] = action.payload.value;
+      } else {
+        preObjectTitles.push(action.payload);
+      }
+
+      let previousMachineObjEditTypes = [...state.machineTypes];
+      let findTypeEditObjIndex = previousMachineObjEditTypes?.findIndex(
+        (item) => item.typeId === action.payload.typeId
+      );
+      if (findTypeEditObjIndex !== -1) {
+        let updatedType = {
+          ...previousMachineObjEditTypes[findTypeEditObjIndex],
+        };
+
+        updatedType.currObjectTitle = action.payload.value;
+
+        previousMachineObjEditTypes[findTypeEditObjIndex] = updatedType;
+      }
+
+      return {
+        ...state,
+        objectTitles: preObjectTitles,
+        machineTypes: previousMachineObjEditTypes,
+      };
+
     default:
       return state;
   }

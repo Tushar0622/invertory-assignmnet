@@ -1,523 +1,556 @@
 :root {
-  --primary-color: #f3f3f3;
-  --secondary-color: #000;
-  --grey-color: #6c767d;
+    --primary-color: #f3f3f3;
+    --secondary-color: #000;
+    --grey-color: #6c767d;
 }
 
 .heading h2 {
-  margin: 14px;
-  color: #333;
-  font-size: 32px;
+    margin: 14px;
+    color: #333;
+    font-size: 32px;
 }
 
 .tab-pane {
-  display: flex;
-  border-top: 4px solid #0e0e0e;
-  margin: 17px;
-  padding: 0px 10px;
-  background: #f3f3f3;
+    display: flex;
+    border-top: 4px solid #0e0e0e;
+    margin: 17px;
+    padding: 0px 10px;
+    background: #f3f3f3;
 }
 
 .tab-button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px 5px 0 0;
-  cursor: pointer;
-  transition: background-color 0.3s;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .tab-button.active {
-  color: #000;
-  font-weight: bold;
+    color: #000;
+    font-weight: bold;
 }
 
 .form-section {
-  display: none;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  position: relative;
-  max-width: 450px;
-  margin: 18px;
+    display: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    position: relative;
+    max-width: 450px;
+    margin: 18px;
 }
 
 .form-section.active {
-  display: block;
+    display: block;
 }
 
 .close-icon {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  font-size: 20px;
-  color: #000;
-  transition: color 0.3s;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #000;
+    transition: color 0.3s;
 }
 
 .form-group {
-  margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .form-group label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: #333;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
 }
 
 .form-group input,
 .form-group select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  max-width: 400px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    max-width: 400px;
 }
 
 .form-group .number-input {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .form-group .number-input input {
-  flex: 1;
-  margin-right: 5px;
+    flex: 1;
+    margin-right: 5px;
 }
 
 .form-group .number-input button {
-  padding: 5px 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #f0f0f0;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f0f0f0;
 }
 
 .form-group .number-input button:hover {
-  background-color: #ddd;
+    background-color: #ddd;
 }
 
 .form-group .dropdown {
-  position: relative;
+    position: relative;
 }
 
 .form-group .dropdown input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  cursor: pointer;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .form-group .dropdown-content {
-  display: none;
-  position: absolute;
-  width: 100%;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  top: 100%;
-  left: 0;
-  z-index: 1;
+    display: none;
+    position: absolute;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    top: 100%;
+    left: 0;
+    z-index: 1;
 }
 
 .form-group .dropdown-content a {
-  display: block;
-  padding: 10px;
-  color: #333;
-  text-decoration: none;
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
 }
 
 .form-group .dropdown-content a:hover {
-  background-color: #f0f0f0;
+    background-color: #f0f0f0;
 }
 
 .form-group .dropdown.active .dropdown-content {
-  display: block;
+    display: block;
 }
 
 /* Flex container for aligning input fields and dropdown button */
 .form-group-container-dropdown {
-  align-items: center;
-  margin: 15px;
+    align-items: center;
+    margin: 15px;
 }
 
 /* Unified field styling */
 .input-dropdown-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  flex: 1;
-  margin-bottom: 15px;
-  /* z-index: 0; */
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    margin-bottom: 15px;
+    /* z-index: 0; */
 }
 
 .input-dropdown-container input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  /* Include padding in width */
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    /* Include padding in width */
 }
 
 .dropdown-button {
-  position: absolute;
-  right: 0;
-  top: 0;
-  background-color: #6c767d;
-  border: 1px solid #ccc;
-  border-left: none;
-  border-radius: 0 4px 4px 0;
-  padding: 6px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  width: 100%;
-  max-width: 150px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #6c767d;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    padding: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    width: 100%;
+    max-width: 150px;
 }
 
 .dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 2;
-  top: 100%;
-  /* Position below the input field */
-  right: 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    top: 100%;
+    /* Position below the input field */
+    right: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
 }
 
 .dropdown-content a:hover {
-  background-color: #f1f1f1;
+    background-color: #f1f1f1;
 }
 
 .dropdown-button:hover .dropdown-content {
-  display: block;
+    display: block;
 }
 
 .form-group-container {
-  margin: 15px;
+    margin: 15px;
 }
 
 .form-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  /* Adjust as needed */
-  background-color: #f1f1f1;
-  /* Background color for the header */
-  border-bottom: 1px solid #ccc;
-  /* Optional: border for the bottom of the header */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    /* Adjust as needed */
+    background-color: #f1f1f1;
+    /* Background color for the header */
+    border-bottom: 1px solid #ccc;
+    /* Optional: border for the bottom of the header */
 }
 
 .form-title {
-  font-size: 16px;
-  /* Adjust font size as needed */
-  color: #333;
-  /* Text color */
+    font-size: 16px;
+    /* Adjust font size as needed */
+    color: #333;
+    /* Text color */
 }
 
 .close-icon {
-  cursor: pointer;
-  font-size: 16px;
-  /* Adjust size as needed */
-  color: #333;
-  /* Icon color */
+    cursor: pointer;
+    font-size: 16px;
+    /* Adjust size as needed */
+    color: #333;
+    /* Icon color */
 }
 
 .dropdown-header {
-  display: flex !important;
-  color: #fff !important;
+    display: flex !important;
+    color: #fff !important;
 }
 
+/* Base styling for dropdown button */
+/* .dropdown-button {
+    position: relative;
+    display: inline-block;
+    background-color: #1e1d1d;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    padding: 6px;
+    cursor: pointer;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    width: 100%;
+    max-width: 150px;
+} */
+
+/* Base styling for dropdown content */
 .dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 2;
-  top: 100%;
-  right: 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+    display: none;
+    /* Hide by default */
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    top: 100%;
+    /* Position below the input field */
+    right: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
+/* Styling for dropdown items */
 .dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
 }
 
+/* Hover effect for dropdown items */
 .dropdown-content a:hover {
-  background-color: #f1f1f1;
+    background-color: #f1f1f1;
 }
 
+/* Show dropdown content when button is active */
 .dropdown-button.active .dropdown-content {
-  display: block;
+    display: block;
+    /* Show dropdown content when button has 'active' class */
 }
 
 .form-group-container {
-  margin: 15px;
+    margin: 15px;
 }
 
 .form-group {
-  position: relative;
+    position: relative;
 }
 
 .input-container {
-  display: flex;
-  align-items: center;
-  position: relative;
+    display: flex;
+    align-items: center;
+    position: relative;
 }
 
 .input-container input {
-  flex: 1;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    /* Include padding in width */
 }
 
 .arrow-container {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  right: 19px;
-  top: 0;
-  height: 100%;
-  border-radius: 0 4px 4px 0;
-  border-bottom: none;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 19px;
+    top: 0;
+    height: 100%;
+    border-radius: 0 4px 4px 0;
+    border-bottom: none;
 }
 
 .arrow-container .arrow-up,
 .arrow-container .arrow-down {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 
-  color: #333;
+    color: #333;
 }
 
 .dropdown-button-one {
-  position: absolute;
-  right: 0;
-  top: 0;
-  background-color: #6c767d;
-  border: 1px solid #ccc;
-  border-left: none;
-  border-radius: 0 4px 4px 0;
-  padding: 6px;
-  cursor: pointer;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  width: 100%;
-  max-width: 400px;
-  margin: 15px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #6c767d;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    padding: 6px;
+    cursor: pointer;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    width: 100%;
+    max-width: 400px;
+    margin: 15px;
 }
 
 .add-field-container {
-  position: relative;
+    position: relative;
 }
 
 .form-section {
-  display: none;
+    display: none;
 }
 
 .form-section.active {
-  display: block;
+    display: block;
 }
 
 .navbar-header .navbar-toggle {
-  border: none;
+    border: none;
 }
 
 .navbar-toggle .icon-bar {
-  background-color: #333;
+    background-color: #333;
 }
 
 .navbar-nav {
-  float: none;
+    float: none;
 }
 
 .navbar-collapse {
-  border-top: 1px solid #ddd;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border-top: 1px solid #ddd;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1);
 }
 
-.input-dropdown-container,
-.dropdown-button-one {
-  position: relative;
+
+
+.input-dropdown-container, .dropdown-button-one {
+    position: relative; /* This makes the dropdown content position relative to this container */
 }
 
 .dropdown-content {
-  position: absolute;
-  z-index: 1000;
-  display: none;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: absolute; /* Ensure it's positioned relative to the .dropdown-button */
+    z-index: 1000; /* Make sure it has a high z-index to be on top of other elements */
+    display: none; /* Hide by default, show when needed */
+    background: #fff; /* Background color for the dropdown content */
+    border: 1px solid #ccc; /* Border to distinguish the dropdown content */
+    border-radius: 4px; /* Optional: Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional: Shadow for better visibility */
 }
 
 .dropdown-button .dropdown-content {
-  z-index: 1000;
+    z-index: 1000; /* Ensure the dropdown content has a higher z-index than other elements */
 }
 
-.dropdown-button,
-.dropdown-button-one {
-  position: relative;
-  cursor: pointer;
+/* Optional: Style the dropdown button */
+.dropdown-button, .dropdown-button-one {
+    position: relative;
+    cursor: pointer; /* Change cursor to pointer for better UX */
 }
 
-.dropdown-button .dropdown-header,
-.dropdown-button-one .dropdown-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.dropdown-button .dropdown-header, .dropdown-button-one .dropdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
 
 @media (min-width: 768px) {
-  .navbar-collapse {
-    display: block !important;
-    height: auto !important;
-  }
+    .navbar-collapse {
+        display: block !important;
+        height: auto !important;
+    }
 
-  .navbar-nav {
-    float: left;
-  }
+    .navbar-nav {
+        float: left;
+    }
 }
 
 .dropdown-menu {
-  max-height: 200px;
-  overflow-y: auto;
+    max-height: 200px;
+    overflow-y: auto;
 }
 
 /* Base Styles */
 .tab-pane {
-  position: relative;
+
+    position: relative;
 }
 
 .tab-pane h3 {
-  margin-top: 10px;
-  margin-bottom: 15px;
+    margin-top: 10px;
+    margin-bottom: 15px;
 }
 
+
 .tab-content {
-  display: none;
-  margin-top: 20px;
+    display: none;
+    margin-top: 20px;
 }
 
 /* Show the active tab content */
 .tab-content.active {
-  display: block;
+    display: block;
 }
 
 /* Hamburger Menu */
 .hamburger {
-  display: none;
-  /* Hidden by default */
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  position: absolute;
-  top: 10px;
-  right: 10px;
+    display: none;
+    /* Hidden by default */
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
 /* Tab Buttons Container */
 .tab-buttons {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-@media (max-width: 768px) {
-  .hamburger {
-    display: block;
-  }
-
-  .tab-buttons {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    background: #fff;
-    position: absolute;
-    top: 50px;
-    left: 0;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 999;
-  }
-
-  .tab-buttons.show {
     display: flex;
-  }
-
-  .tab-button {
-    margin: 5px 0;
-    width: 100%;
-    text-align: left;
-  }
-
-  .tab-content {
-    margin-top: 10px;
-  }
+    flex-wrap: wrap;
 }
 
-.input-dropdown-container,
-.dropdown-button-one {
-  position: relative;
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+        /* Show hamburger menu on smaller screens */
+    }
+
+    .tab-buttons {
+        display: none;
+        /* Hide tab buttons by default on smaller screens */
+        flex-direction: column;
+        width: 100%;
+        background: #fff;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        border: 1px solid #ddd;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+    }
+
+    .tab-buttons.show {
+        display: flex;
+        /* Show tab buttons when hamburger menu is clicked */
+    }
+
+    .tab-button {
+        margin: 5px 0;
+        width: 100%;
+        text-align: left;
+    }
+
+    .tab-content {
+        margin-top: 10px;
+    }
+}
+
+
+.input-dropdown-container, .dropdown-button-one {
+    position: relative; /* This makes the dropdown content position relative to this container */
 }
 
 .dropdown-content {
-  position: absolute;
-  z-index: 1000;
-  display: none;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: absolute; /* Ensure it's positioned relative to the .dropdown-button */
+    z-index: 1000; /* Make sure it has a high z-index to be on top of other elements */
+    display: none; /* Hide by default, show when needed */
+    background: #fff; /* Background color for the dropdown content */
+    border: 1px solid #ccc; /* Border to distinguish the dropdown content */
+    border-radius: 4px; /* Optional: Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional: Shadow for better visibility */
 }
 
 .dropdown-button .dropdown-content {
-  z-index: 1000;
+    z-index: 1000; /* Ensure the dropdown content has a higher z-index than other elements */
 }
 
-.dropdown-button,
-.dropdown-button-one {
-  position: relative;
-  cursor: pointer;
+/* Optional: Style the dropdown button */
+.dropdown-button, .dropdown-button-one {
+    position: relative;
+    cursor: pointer; /* Change cursor to pointer for better UX */
 }
 
-.dropdown-button .dropdown-header,
-.dropdown-button-one .dropdown-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.dropdown-button .dropdown-header, .dropdown-button-one .dropdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .tab-button a {
-  color: #000;
-  font-weight: 600;
-  text-decoration: none;
-}
+    color: #000;
+    font-weight: 600;
+    text-decoration: none;
+} 

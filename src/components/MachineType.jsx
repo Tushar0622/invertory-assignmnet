@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -13,12 +13,12 @@ import { removeType } from "../store/actions/machineFieldActions";
 import {
   editTypeName,
   updateSingleFieldType,
+  addObjectTitle,
 } from "../store/actions/machineFieldActions";
 
 const RenderInput = ({ type, field, handleInputChange }) => {
   switch (type) {
     case "number":
-      console.log("DATA THSI", field.name)
       return (
         <input
           className="type_input_field"
@@ -33,8 +33,8 @@ const RenderInput = ({ type, field, handleInputChange }) => {
         <input
           className="type_input_field"
           type="text"
-          value={field.name}
           name={field.id}
+          value={field.name}
           maxLength={100}
           onChange={(e) => handleInputChange(e)}
         />
@@ -44,8 +44,8 @@ const RenderInput = ({ type, field, handleInputChange }) => {
         <textarea
           className="type_input_field"
           maxLength={200}
-          value={field.name}
           name={field.id}
+          value={field.name}
           onChange={(e) => handleInputChange(e)}
         />
       );
@@ -70,6 +70,15 @@ const MachineType = () => {
     (state) => state.machineFieldReducer?.machineTypes
   );
   const types = useSelector((state) => state.machineFieldReducer?.types);
+  const objectTitles = useSelector(
+    (state) => state.machineFieldReducer.objectTitles
+  );
+
+  const [updateTrigger, setUpdateTrigger] = useState(0);
+
+  useEffect(() => {
+    setUpdateTrigger((prev) => prev + 1);
+  }, [objectTitles]);
 
   const handleAddField = (typeId) => {
     dispatch(addField(typeId));
@@ -121,17 +130,33 @@ const MachineType = () => {
     dispatch(updateSingleFieldType(index, value, typeId, fieldId));
   };
 
+  const handleObjTitleChange = (e, typeId) => {
+    dispatch(addObjectTitle({ typeId: typeId, value: e.target.value }));
+  };
+
+  const getObjTileValue = (typeId) => {
+    let retVal = "";
+    let findRetVal =
+      objectTitles &&
+      objectTitles.length > 0 &&
+      objectTitles.find((item) => item.typeId === typeId);
+    if (findRetVal) {
+      retVal = findRetVal.value;
+    }
+    return retVal;
+  };
+
   return (
     <>
       <div className="container">
         <Row>
-          {console.log("GHGHGH:", machineTypes)}
+          {console.log("OBJECT_TITLES:", objectTitles)}
           {machineTypes &&
             machineTypes.length > 0 &&
             machineTypes.map((item, index) => (
               <>
-                <Col xs={12} sm={6} lg={4} xl={3}>
-                  <div className="type_container type_wrapper">
+                <Col xs={12} sm={6} lg={4} xl={3} key={updateTrigger}>
+                  <div className="type_container type_wrapper mb-3">
                     <div className="form_container">
                       <div className="type_form d-flex justify-content-between align-items-center p-3 type_wrapper_header">
                         <span>{item?.machineType}</span>
@@ -146,6 +171,7 @@ const MachineType = () => {
                             Object type
                           </Form.Label>
                           <Form.Control
+                            // type="text"
                             value={item?.machineType}
                             type={"text"}
                             name="objectType"
@@ -157,10 +183,16 @@ const MachineType = () => {
 
                         <Form.Group className="mb-3">
                           <Form.Label>Object Title</Form.Label>
-                          <Form.Select aria-label="Default select example">
+                          <Form.Select
+                            aria-label="Default select example"
+                            value={item?.currObjectTitle}
+                            onChange={(e) =>
+                              handleObjTitleChange(e, item.typeId)
+                            }
+                          >
                             <option>select</option>
                             {item?.fields?.map((item) => (
-                              <option value={item?.id}>{item?.name}</option>
+                              <option value={item?.name}>{item?.name}</option>
                             ))}
                           </Form.Select>
                         </Form.Group>

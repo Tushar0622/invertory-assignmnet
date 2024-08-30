@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { Dropdown, DropdownButton, Form, Row, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,6 +12,8 @@ import { v4 as uuidv4 } from "uuid";
 const MachineList = () => {
   const dispatch = useDispatch();
 
+  const [currValue, setCurrValue] = useState("");
+
   const allMachineList = useSelector(
     (state) => state.machineReducer.machineList
   );
@@ -20,6 +22,9 @@ const MachineList = () => {
   );
   const currMachineList = useSelector(
     (state) => state.machineReducer.currMachineList
+  );
+  const objectTitles = useSelector(
+    (state) => state.machineFieldReducer.objectTitles
   );
 
   useEffect(() => {}, [machineTypes]);
@@ -80,6 +85,26 @@ const MachineList = () => {
     dispatch(updateMachineInfo(data));
   };
 
+  const getTitles = (machineItem, valuesItem) => {
+    let retVal = "No title";
+    let findItem =
+      valuesItem &&
+      valuesItem.length > 0 &&
+      valuesItem.find((item) => item.typeId === machineItem.typeId);
+    if (findItem) {
+      retVal = machineItem[findItem.value];
+    }
+    return retVal;
+  };
+
+  const getItemValues = (machineItem, machineItemField) => {
+    let retValue = "";
+
+    retValue = machineItem[machineItemField.name];
+
+    return retValue;
+  };
+
   return (
     <div className="container">
       <div>
@@ -89,11 +114,11 @@ const MachineList = () => {
             allMachineList.map((machineItem, index) => (
               <React.Fragment key={machineItem?.id}>
                 <Col xs={12} sm={6} lg={4} xl={3}>
-                  <div className="machine_wrapper">
+                  <div className="machine_wrapper mb-3">
                     <div className="machine_wrapper_header p-3 d-flex justify-content-between align-items-center">
-                      <p className="mb-0">{`${machineItem?.machineType} - ${
-                        machineItem?.Model ? machineItem?.Model : "No title"
-                      }`}</p>
+                      <p className="mb-0">
+                        {getTitles(machineItem, objectTitles)}
+                      </p>
                       <IoClose
                         onClick={() => handleMachineDelete(machineItem.id)}
                       />
@@ -111,7 +136,11 @@ const MachineList = () => {
                               type={getInputType(machineItemField?.type)}
                               id={`${machineItemField?.id}${machineItem.id}`}
                               name={`${machineItemField.name}`}
-                              onBlur={(e) =>
+                              value={getItemValues(
+                                machineItem,
+                                machineItemField
+                              )}
+                              onChange={(e) =>
                                 handleInputBlur(
                                   e,
                                   machineItem,

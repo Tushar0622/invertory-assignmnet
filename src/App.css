@@ -37,6 +37,8 @@
   }
 }
 
+
+
 .nav_bar ul{
   list-style: none;
   display: flex;
@@ -44,6 +46,11 @@
   gap: 1rem;
 }
 
+
+
+
+
+/*========================= MACHINE STYLING BEGINS =======================*/
 .machine_wrapper{
   border: 1px solid #DBE0E3;
   border-radius: 5px;
@@ -90,6 +97,8 @@
   height: 38px;
   padding: 0 8px;
 }
+
+/*========================= MACHINE STYLING END =======================*/
 
 .btn_tab a{
   color: #1F2328;

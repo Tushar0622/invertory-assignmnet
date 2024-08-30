@@ -36,3 +36,8 @@ export const removeType = (id) => ({
   type: "REMOVE_TYPE",
   payload: id
 });
+
+export const addObjectTitle = (data) => ({
+  type: "ADD_OBJ_TITLE",
+  payload: data
+});

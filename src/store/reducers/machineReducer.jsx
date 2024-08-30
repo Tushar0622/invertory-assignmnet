@@ -1,4 +1,3 @@
-import { ALL_TYPES_MACHINE_LIST } from "../../constant/machineConstants";
 
 const initialState = {
   machineList: [],
@@ -29,14 +28,16 @@ export const machineReducer = (state = initialState, action) => {
       const machineIndex = updatedMachineList.findIndex(
         (item) => item.id === action.payload.machineId
       );
+
+      let updatedCurrMachineList = [...state.currMachineList];
+      const machineCurrIndex = updatedCurrMachineList.findIndex(
+        (item) => item.id === action.payload.machineId
+      );
+
       if (machineIndex !== -1) {
         const machineToUpdate = updatedMachineList[machineIndex];
-        if (
-          Object.prototype.hasOwnProperty.call(
-            machineToUpdate,
-            action.payload.updateKey
-          )
-        ) {
+
+        if (Object.hasOwnProperty(action.payload.updateKey)) {
           const updatedMachine = {
             ...machineToUpdate,
             [action.payload.updateKey]: action.payload.updateValue,
@@ -52,9 +53,30 @@ export const machineReducer = (state = initialState, action) => {
       } else {
         console.log("Machine not found in machineList");
       }
+
+      if (machineCurrIndex !== -1) {
+        const machineToUpdate = updatedCurrMachineList[machineCurrIndex];
+
+        if (Object.hasOwnProperty(action.payload.updateKey)) {
+          const updatedMachine = {
+            ...machineToUpdate,
+            [action.payload.updateKey]: action.payload.updateValue,
+          };
+          updatedCurrMachineList[machineCurrIndex] = updatedMachine;
+        } else {
+          const updatedMachine = {
+            ...machineToUpdate,
+            [action.payload.updateKey]: action.payload.updateValue,
+          };
+          updatedCurrMachineList[machineCurrIndex] = updatedMachine;
+        }
+      } else {
+        console.log("Machine not found in machineList");
+      }
       return {
         ...state,
         machineList: updatedMachineList,
+        currMachineList: updatedCurrMachineList,
       };
 
     case "DELETE_MACHINE":
@@ -98,7 +120,6 @@ export const machineReducer = (state = initialState, action) => {
         machineTypes: action.payload,
       };
 
-    // THIS IS THE PART OF TYPE
     case "GET_CURRENT_TYPE":
       return {
         ...state,
