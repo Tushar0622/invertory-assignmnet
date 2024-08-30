@@ -23,14 +23,46 @@ export const machineReducer = (state = initialState, action) => {
                 machineList: prevCombinedMachine,
                 currMachineList: machineListByType,
             }
+
+        case "UPDATE_MACHINE_INFO":
+            let updatedMachineList = [...state.machineList];
+            const machineIndex = updatedMachineList.findIndex(item => item.id === action.payload.machineId);
+            if (machineIndex !== -1) {
+                const machineToUpdate = updatedMachineList[machineIndex];
+                if (Object.prototype.hasOwnProperty.call(machineToUpdate, action.payload.updateKey)) {
+                    const updatedMachine = {
+                        ...machineToUpdate,
+                        [action.payload.updateKey]: action.payload.updateValue
+                    };
+                    updatedMachineList[machineIndex] = updatedMachine;
+                } else {
+                    const updatedMachine = {
+                        ...machineToUpdate,
+                        [action.payload.updateKey]: action.payload.updateValue
+                    };
+                    updatedMachineList[machineIndex] = updatedMachine;
+                }
+            } else {
+                console.log('Machine not found in machineList');
+            }
+            return {
+                ...state,
+                machineList: updatedMachineList
+            };
+
         case "DELETE_MACHINE":
             let filteredMachine = state.machineList;
             if(state.machineList.length > 0){
                 filteredMachine = filteredMachine?.filter((item) => item.id !== action.payload);
             }
+            let oldMachineList = state.currMachineList
+            if(state.currMachineList.length > 0){
+                oldMachineList = oldMachineList?.filter((item) => item.id !== action.payload);
+            }
             return {
                 ...state,
-                machineList: filteredMachine
+                machineList: filteredMachine,
+                currMachineList: oldMachineList
             }
         case "GET_MACHINE_BY_TYPE":
             let previousMachines = state.machineList;

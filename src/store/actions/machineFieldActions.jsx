@@ -16,6 +16,11 @@ export const updateFieldType = (index, newType, typeId, fieldId) => ({
   payload: { index, newType, typeId, fieldId }
 });
 
+export const updateSingleFieldType = (index, newType, typeId, fieldId) => ({
+  type: "UPDATE_SINGLE_FIELD",
+  payload: { index, newType, typeId, fieldId }
+});
+
 export const removeField = (index, newType, typeId, fieldId) => ({
   type: "REMOVE_FIELD",
   payload: { index, newType, typeId, fieldId }

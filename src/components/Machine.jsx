@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dropdown, DropdownButton, Form, Row, Col, Button  } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { addNewMachine, deleteMachine, getMachineListByType, addNewMachineByType } from '../store/actions/machineAction';
+import { addNewMachine, deleteMachine, getMachineListByType, addNewMachineByType, updateMachineInfo } from '../store/actions/machineAction';
 import { v4 as uuidv4 } from 'uuid';
 import { ALL_TYPES_MACHINE_LIST } from '../constant/machineConstants';
 
@@ -12,12 +12,12 @@ const Machine = () => {
   const allMachineList = useSelector((state) => state.machineReducer.machineList);
   const currMachineList = useSelector((state) => state.machineReducer.currMachineList);
   const currMachineType = useSelector((state) => state.machineReducer.currentMachineType);
+  const machineTypes = useSelector((state) => state.machineFieldReducer.machineTypes);
 
 
   const handleAddMachine = (item) => {
 
     const uniqueId = uuidv4();
-    // console.log("GGHJGH:", uniqueId)
 
     let newMachine = {
         id: uniqueId,
@@ -34,22 +34,54 @@ const Machine = () => {
 
     dispatch(addNewMachineByType((newMachine)));
 
-    // console.log("itemId:", itemId)
   }
 
   const handleMachineDelete = (machineId) => {
       dispatch(deleteMachine(machineId));
   }
 
-  const handleInputBlur = (e, item) => {
-    debugger
-    var existingItems = allMachineList.find(x=>x.id == item.id);
-    if(existingItems !== undefined){
-      const newData = {...existingItems, [e.target.name]: e.target.value}
-      dispatch(addNewMachine(newData))
+  const getInputType = (fieldType) => {
+    switch (fieldType) {
+    case 'number':
+        return "number";
+    case 'small text':
+        return "text";
+    case 'long text':
+        return "text";
+    case 'date':
+        return "date";
+    default:
+        return null;
     }
-    console.log(`${e.target.name}: ${e.target.value}`)
-  }
+};
+
+
+
+    const getMachineTypeFields = (machineItem) => {
+        let returnValue = []
+        let findedValue = machineTypes && machineTypes.length > 0 && machineTypes.find((item) => item.typeId === machineItem.typeId)
+        if(findedValue){
+            returnValue = findedValue
+        }
+        return returnValue
+    }
+
+    const handleInputBlur = (e, item, fieldId) => {
+        //    let id = item.id
+    
+           let data = {
+               machineId: item.id,
+               updateValue: e.target.value,
+               updateKey: e.target.name
+           }
+    
+           dispatch(updateMachineInfo(data))
+            // let existingItems = allMachineList.find(x=>x.id == item.id);
+            // if(existingItems !== undefined){
+            //   const newData = {...existingItems, [e.target.name]: e.target.value}
+            //   dispatch(addNewMachine(newData))
+            // }
+        }
 
   return (
     <div className='container'>
@@ -64,7 +96,22 @@ const Machine = () => {
                                         <button onClick={() => handleMachineDelete(machineItem.id)}>Del</button>
                                     </div>
                                     <div className='p-3'>
-                                        <div>
+                                        {getMachineTypeFields(machineItem)?.fields.map((machineItemField, machineInd) => (
+                                            <div>
+                                                <Form.Label htmlFor={machineItemField?.id}>{machineItemField.name}</Form.Label>
+                                                <Form.Control
+                                                    // type="text"
+                                                    // type={getInputType(machineItemField?.type)}
+                                                    // id={machineItemField?.id}
+                                                    type={getInputType(machineItemField?.type)}
+                                                    id={`${machineItemField?.id}${machineItem.id}`}
+                                                    name={`${machineItemField?.id}${machineItem.id}`}
+                                                    onBlur={(e) => handleInputBlur(e, machineItem, machineItemField?.id)}
+                                                />
+                                            </div>
+                                        ))}
+
+                                        {/* <div>
                                             <Form.Label htmlFor="inputModel">Model</Form.Label>
                                             <Form.Control
                                                 type="text"
@@ -108,7 +155,7 @@ const Machine = () => {
                                                 name="brand"
                                                 onBlur={(e) => handleInputBlur(e, machineItem)}
                                             />
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </Col>

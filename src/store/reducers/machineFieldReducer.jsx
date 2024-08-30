@@ -66,11 +66,31 @@ export const machineFieldReducer = (state = initialState, action) => {
     machineTypes: previousMachineTypesField,
   };
 
+
+    case "UPDATE_SINGLE_FIELD":
+  let previousSingleMachineTypesField = [...state.machineTypes];
+  let findSingleTypeIndexField = previousSingleMachineTypesField?.findIndex((item) => item.typeId === action.payload.typeId);
+  
+  if (findSingleTypeIndexField !== -1) {
+    let updatedType = { ...previousSingleMachineTypesField[findSingleTypeIndexField] };
+    let findFieldInd = updatedType.fields?.findIndex((fieldItem) => fieldItem.id === action.payload.fieldId);
+    if (findFieldInd !== -1 && findFieldInd !== undefined) {
+      let updatedField = { ...updatedType.fields[findFieldInd] };
+      updatedField.name = action.payload.newType;
+      updatedType.fields[findFieldInd] = updatedField;
+      previousSingleMachineTypesField[findSingleTypeIndexField] = updatedType;
+    }
+  }
+
+  return {
+    ...state,
+    machineTypes: previousSingleMachineTypesField,
+  };
+
   case "REMOVE_FIELD":
 
   let previousMachineTypesRemoveField = [...state.machineTypes];
   let findTypeIndexRemoveField = previousMachineTypesRemoveField?.findIndex((item) => item.typeId === action.payload.typeId);
-  debugger
   if (findTypeIndexRemoveField !== -1) {
     let updatedType = { ...previousMachineTypesRemoveField[findTypeIndexRemoveField] };
     let findFieldInd = updatedType.fields?.findIndex((fieldItem) => fieldItem.id === action.payload.fieldId);
@@ -88,9 +108,10 @@ export const machineFieldReducer = (state = initialState, action) => {
          machineTypes: previousMachineTypesRemoveField,
       };
       case "REMOVE_TYPE":
+        let filteredItem = state.machineTypes.filter(item => item.typeId !== action.payload)
       return {
         ...state,
-        machineTypes: state.machineTypes.filter(item => item.typeId !== action.payload)
+        machineTypes: filteredItem
       };
     default:
       return state;

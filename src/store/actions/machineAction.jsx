@@ -27,6 +27,11 @@ export const getMachine = (data) => ({
     payload: data
 });
 
+export const updateMachineInfo = (data) => ({
+    type: "UPDATE_MACHINE_INFO",
+    payload: data
+});
+
 
 
 
