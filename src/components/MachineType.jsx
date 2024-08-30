@@ -1,32 +1,69 @@
-import React from 'react';
+import React from "react";
 import { IoClose } from "react-icons/io5";
-import { useDispatch, useSelector } from 'react-redux';
-import { addField, updateFieldType, removeField } from '../store/actions/machineFieldActions';
-import { addType } from '../store/actions/machineFieldActions';
-import { Row, Col, Card, Button,Form } from 'react-bootstrap';
-import { v4 as uuidv4 } from 'uuid';
-import { removeType } from '../store/actions/machineFieldActions';
-import { editTypeName, updateSingleFieldType } from '../store/actions/machineFieldActions';
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addField,
+  updateFieldType,
+  removeField,
+} from "../store/actions/machineFieldActions";
+import { addType } from "../store/actions/machineFieldActions";
+import { Row, Col, Form } from "react-bootstrap";
+import { v4 as uuidv4 } from "uuid";
+import { removeType } from "../store/actions/machineFieldActions";
+import {
+  editTypeName,
+  updateSingleFieldType,
+} from "../store/actions/machineFieldActions";
 
-
-const RenderInput = ({type, field, handleInputChange}) => {
+const RenderInput = ({ type, field, handleInputChange }) => {
   switch (type) {
-    case 'number':
-      return <input type='number' name={field.id} onChange={(e) => handleInputChange(e)} />;
-    case 'small text':
-      return <input type='text' name={field.id} maxLength={100} onChange={(e) => handleInputChange(e)} />;
-    case 'long text':
-      return <textarea maxLength={200} name={field.id} onChange={(e) => handleInputChange(e)} />;
-    case 'date':
-      return <input type='date' name={field.id} onChange={(e) => handleInputChange(e)} />;
+    case "number":
+      return (
+        <input
+          className="type_input_field"
+          type="number"
+          name={field.id}
+          onChange={(e) => handleInputChange(e)}
+        />
+      );
+    case "small text":
+      return (
+        <input
+          className="type_input_field"
+          type="text"
+          name={field.id}
+          maxLength={100}
+          onChange={(e) => handleInputChange(e)}
+        />
+      );
+    case "long text":
+      return (
+        <textarea
+          className="type_input_field"
+          maxLength={200}
+          name={field.id}
+          onChange={(e) => handleInputChange(e)}
+        />
+      );
+    case "date":
+      return (
+        <input
+          className="type_input_field"
+          type="date"
+          name={field.id}
+          onChange={(e) => handleInputChange(e)}
+        />
+      );
     default:
       return null;
   }
-}
+};
 
 const MachineType = () => {
   const dispatch = useDispatch();
-  const machineTypes = useSelector((state) => state.machineFieldReducer?.machineTypes);
+  const machineTypes = useSelector(
+    (state) => state.machineFieldReducer?.machineTypes
+  );
   const types = useSelector((state) => state.machineFieldReducer?.types);
 
   const handleAddField = (typeId) => {
@@ -34,7 +71,7 @@ const MachineType = () => {
   };
 
   const handleFieldTypeChange = (index, newType, typeId, fieldId) => {
-    if (newType === 'remove') {
+    if (newType === "remove") {
       handleRemoveField(index, newType, typeId, fieldId);
     } else {
       dispatch(updateFieldType(index, newType, typeId, fieldId));
@@ -44,7 +81,6 @@ const MachineType = () => {
   const handleRemoveField = (index, newType, typeId, fieldId) => {
     dispatch(removeField(index, newType, typeId, fieldId));
   };
-
 
   function generateUniqueId() {
     return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -56,14 +92,21 @@ const MachineType = () => {
       typeId: uniqueId,
       machineType: "",
       title: "",
-      fields: [{ id: generateUniqueId(), type: 'small text', fieldType: "text", name: "" }]
-    }
-    dispatch(addType(newType))
+      fields: [
+        {
+          id: generateUniqueId(),
+          type: "small text",
+          fieldType: "text",
+          name: "",
+        },
+      ],
+    };
+    dispatch(addType(newType));
   };
 
   const handleObjectTypeBlur = (e, typeId) => {
-    dispatch(editTypeName({value: e.target.value, typeId: typeId}))
-  }
+    dispatch(editTypeName({ value: e.target.value, typeId: typeId }));
+  };
 
   const handleRemoveType = (typeId) => {
     dispatch(removeType(typeId));
@@ -71,67 +114,124 @@ const MachineType = () => {
 
   const handleChangeInput = (index, value, typeId, fieldId) => {
     dispatch(updateSingleFieldType(index, value, typeId, fieldId));
-  }
-
-  
+  };
 
   return (
     <>
-      <div className='container mt-4'>
-      <Row>
-        {machineTypes && machineTypes.length > 0 && machineTypes.map((item, index) => (
-          <Col key={index} xs={12} sm={6} lg={4} xl={3} className='mb-4'>
-            <Card>
-              <Card.Header className='d-flex justify-content-between align-items-center'>
-                <span>{item.machineType || 'New Type'}</span>
-                <IoClose onClick={() => handleRemoveType(item.typeId)} style={{ cursor: 'pointer' }} />
-              </Card.Header>
-              <Card.Body>
-                <Form>
-                  <Form.Group className='mb-3'>
-                    <Form.Label>Object Type</Form.Label>
-                    <Form.Control
-                      type='text'
-                      value={item.machineType}
-                      onChange={(e) => handleObjectTypeBlur(e, item.typeId)}
-                      placeholder='Enter object type'
-                    />
-                  </Form.Group>
-                  <div className='fields_container'>
-                    {item.fields.map((field, itemInd) => (
-                      <div key={itemInd} className='field_container mb-3'>
-                        <Form.Group>
-                          <Form.Label>Field Type</Form.Label>
-                          <Form.Select
-                            value={field.type}
-                            onChange={(e) => handleFieldTypeChange(itemInd, e.target.value, item.typeId, field.id)}
-                          >
-                            <option value='number'>Number</option>
-                            <option value='small text'>Small Text</option>
-                            <option value='long text'>Long Text</option>
-                            <option value='date'>Date</option>
-                            <option value='remove'>Remove</option>
+      <div className="container">
+        <Row>
+          {console.log("GHGHGH:", machineTypes)}
+          {machineTypes &&
+            machineTypes.length > 0 &&
+            machineTypes.map((item, index) => (
+              <>
+                <Col xs={12} sm={6} lg={4} xl={3}>
+                  <div className="type_container type_wrapper">
+                    <div className="form_container">
+                      <div className="type_form d-flex justify-content-between align-items-center p-3 type_wrapper_header">
+                        <span>{item?.machineType}</span>
+                        <IoClose
+                          onClick={() => handleRemoveType(item.typeId)}
+                        />
+                      </div>
+
+                      <div className="p-3">
+                        <div className="machine__input_wrapper pb-3">
+                          <Form.Label htmlFor="objectType">
+                            Object type
+                          </Form.Label>
+                          <Form.Control
+                            // type="text"
+                            value={item?.machineType}
+                            type={"text"}
+                            name="objectType"
+                            onChange={(e) =>
+                              handleObjectTypeBlur(e, item.typeId)
+                            }
+                          />
+                        </div>
+
+                        <Form.Group className="mb-3">
+                          <Form.Label>Object Title</Form.Label>
+                          <Form.Select aria-label="Default select example">
+                            <option>select</option>
+                            {item?.fields?.map((item) => (
+                              <option value={item?.id}>{item?.name}</option>
+                            ))}
                           </Form.Select>
                         </Form.Group>
-                        <RenderInput type={field.type} field={field} handleInputChange={(e) => handleChangeInput(itemInd, e.target.value, item.typeId, field.id)} />
+
+                        <div className="fields_container">
+                          <p className="lbl_fields mb-2">Fields</p>
+                          {item &&
+                            item.fields &&
+                            item.fields.length > 0 &&
+                            item.fields.map((field, itemInd) => (
+                              <div
+                                key={itemInd}
+                                className="field_container type_field_wrapper mb-3"
+                              >
+                                <RenderInput
+                                  type={field.type}
+                                  field={field}
+                                  handleInputChange={(e) =>
+                                    handleChangeInput(
+                                      itemInd,
+                                      e.target.value,
+                                      item?.typeId,
+                                      field.id
+                                    )
+                                  }
+                                />
+                                <select
+                                  className="type_field_select_"
+                                  value={field.type}
+                                  onChange={(e) =>
+                                    handleFieldTypeChange(
+                                      itemInd,
+                                      e.target.value,
+                                      item?.typeId,
+                                      field.id
+                                    )
+                                  }
+                                >
+                                  <option value="number">Number</option>
+                                  <option value="small text">Small Text</option>
+                                  <option value="long text">Long Text</option>
+                                  <option value="date">Date</option>
+                                  <option value="remove">Remove</option>
+                                </select>
+                              </div>
+                            ))}
+                        </div>
+
+                        <div>
+                          <button
+                            className="global_btn"
+                            onClick={() => handleAddField(item?.typeId)}
+                          >
+                            Add Field
+                          </button>
+                        </div>
                       </div>
-                    ))}
+                    </div>
                   </div>
-                  <Button variant='primary' onClick={() => handleAddField(item.typeId)}>
-                    Add Field
-                  </Button>
-                </Form>
-              </Card.Body>
-            </Card>
+                </Col>
+              </>
+            ))}
+
+          <Col xs={12} sm={6} lg={4} xl={3}>
+            <div className="type_btn_cont">
+              <button
+                className="type_btn global_btn"
+                onClick={() => handleAddType()}
+              >
+                Add Type
+              </button>
+            </div>
           </Col>
-        ))}
-        <Col xs={12} sm={6} lg={4} xl={3} className='d-flex align-items-center justify-content-center'>
-          <Button variant='outline-primary' onClick={handleAddType}>
-            Add Type
-          </Button>
-        </Col>
-      </Row>
-    </div>
+        </Row>
+      </div>
     </>
   );
 };
