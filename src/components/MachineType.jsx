@@ -18,11 +18,13 @@ import {
 const RenderInput = ({ type, field, handleInputChange }) => {
   switch (type) {
     case "number":
+      console.log("DATA THSI", field.name)
       return (
         <input
           className="type_input_field"
           type="number"
           name={field.id}
+          value={field.name}
           onChange={(e) => handleInputChange(e)}
         />
       );
@@ -31,6 +33,7 @@ const RenderInput = ({ type, field, handleInputChange }) => {
         <input
           className="type_input_field"
           type="text"
+          value={field.name}
           name={field.id}
           maxLength={100}
           onChange={(e) => handleInputChange(e)}
@@ -41,6 +44,7 @@ const RenderInput = ({ type, field, handleInputChange }) => {
         <textarea
           className="type_input_field"
           maxLength={200}
+          value={field.name}
           name={field.id}
           onChange={(e) => handleInputChange(e)}
         />
@@ -51,6 +55,7 @@ const RenderInput = ({ type, field, handleInputChange }) => {
           className="type_input_field"
           type="date"
           name={field.id}
+          value={field.name}
           onChange={(e) => handleInputChange(e)}
         />
       );
@@ -141,7 +146,6 @@ const MachineType = () => {
                             Object type
                           </Form.Label>
                           <Form.Control
-                            // type="text"
                             value={item?.machineType}
                             type={"text"}
                             name="objectType"
